@@ -1,0 +1,14 @@
+# Nodemon
+.nodemon
+.nodedemon
+.nodedemonignore
+
+# Geçici dosyalar
+.cache/
+.nyc_output/
+
+# Log dosyaları
+*.log
+
+# Özel araçlar veya hizmetler
+toolname/
