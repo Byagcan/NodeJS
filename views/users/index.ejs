@@ -21,25 +21,23 @@
       <div class="row">
         <div class="col-md-3">
           <div class="list-group">
-            <a href="" class="list-group-item list-group-items-action active"
-              >Web Programming</a
-            >
+            <!-- <% for( let index = 0; index < categories.length; index++ ) { %>
             <a href="" class="list-group-item list-group-items-action"
-              >Mobile Programming</a
+              ><%= categories[index] %></a
             >
-            <a href="" class="list-group-item list-group-items-action"
-              >IOS Programming</a
+
+            <% } %> -->
+
+            <% categories.forEach( function( category ) { %>
+
+            <a href="" class="list-group-item list-group-items-action">
+              <%= category %></a
             >
-            <a href="" class="list-group-item list-group-items-action"
-              >AI Programming</a
-            >
-            <a href="" class="list-group-item list-group-items-action"
-              >Devops</a
-            >
+            <% }) %>
           </div>
         </div>
         <div class="col-md-9">
-          <h1 class="h3 mt-3">Home Page</h1>
+          <h1 class="h3 mt-3"><%=title %></h1>
           <div class="card mb-3">
             <div class="row">
               <div class="col-md-3">
