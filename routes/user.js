@@ -10,6 +10,29 @@ const data = {
     "IOS Programming",
     "AI Programming",
   ],
+  blogs: [
+    {
+      blogid: 1,
+      title: "Komple Uygulamalı Web Programlama",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+      image: "/static/images/webdeveloper.jpg",
+    },
+    {
+      id: 2,
+      title: "Komple Uygulamalı Mobil Programlama",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+      image: "/static/images/android.jpg",
+    },
+    {
+      id: 3,
+      title: "Komple Uygulamalı IOS Programlama",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+      image: "/static/images/iosdeveloper.png",
+    },
+  ],
 };
 
 router.use("/blogs/:blogid", function (req, res) {
@@ -17,7 +40,7 @@ router.use("/blogs/:blogid", function (req, res) {
 });
 
 router.use("/blog", function (req, res) {
-  res.render("users/blogs");
+  res.render("users/blogs", data);
 });
 
 router.use("/", function (req, res) {

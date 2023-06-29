@@ -1,33 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
+    <%- include('../partials/header', headertitle="Home Page") %>
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
-      <div class="container">
-        <a href="/" class="navbar-brand">Blogapp</a>
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a href="/blogs" class="nav-link">Blog Listesi</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <%- include('../partials/nav') %>
     <div class="container mt-3">
       <div class="row">
         <div class="col-md-3">
           <div class="list-group">
-            <!-- <% for( let index = 0; index < categories.length; index++ ) { %>
-            <a href="" class="list-group-item list-group-items-action"
-              ><%= categories[index] %></a
-            >
-
-            <% } %> -->
-
             <% categories.forEach( function( category ) { %>
 
             <a href="" class="list-group-item list-group-items-action">
@@ -38,68 +19,22 @@
         </div>
         <div class="col-md-9">
           <h1 class="h3 mt-3"><%=title %></h1>
+          <% blogs.forEach(blog => { %>
           <div class="card mb-3">
             <div class="row">
               <div class="col-md-3">
-                <img
-                  src="/static/images/webdeveloper.jpg"
-                  alt=""
-                  class="img-fluid"
-                />
+                <img src="<%= blog.image %>" alt="" class="img-fluid" />
               </div>
               <div class="col-md-9">
                 <div class="card-body">
-                  <h5 class="card-title">Komple Web Programlama Kursu</h5>
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quisquam, voluptatum.
-                  </p>
+                  <h5 class="card-title"><%= blog.title %></h5>
+                  <p class="card-text"><%= blog.description %></p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="card mb-3">
-            <div class="row">
-              <div class="col-md-3">
-                <img
-                  src="/static/images/android.jpg"
-                  alt=""
-                  class="img-fluid"
-                />
-              </div>
-              <div class="col-md-9">
-                <div class="card-body">
-                  <h5 class="card-title">Komple Mobile Programlama Kursu</h5>
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quisquam, voluptatum.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card mb-3">
-            <div class="row">
-              <div class="col-md-3">
-                <img
-                  src="/static/images/iosdeveloper.png"
-                  alt=""
-                  class="img-fluid"
-                />
-              </div>
-              <div class="col-md-9">
-                <div class="card-body">
-                  <h5 class="card-title">Komple IOS Programlama Kursu</h5>
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quisquam, voluptatum.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <% }) %>
         </div>
       </div>
     </div>
