@@ -1,50 +1,44 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-
-const data = {
-  title: "Popüler Kurslar",
-  categories: [
-    "Web Programming",
-    "Mobile Programming",
-    "IOS Programming",
-    "AI Programming",
-  ],
-  blogs: [
-    {
-      blogid: 1,
-      title: "Komple Uygulamalı Web Programlama",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-      image: "/static/images/webdeveloper.jpg",
-    },
-    {
-      id: 2,
-      title: "Komple Uygulamalı Mobil Programlama",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-      image: "/static/images/android.jpg",
-    },
-    {
-      id: 3,
-      title: "Komple Uygulamalı IOS Programlama",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-      image: "/static/images/iosdeveloper.png",
-    },
-  ],
-};
+const db = require("../data/db");
 
 router.use("/blogs/:blogid", function (req, res) {
   res.render("users/blog-details");
 });
 
-router.use("/blog", function (req, res) {
-  res.render("users/blogs", data);
+router.use("/blogs", function (req, res) {
+  db.execute("SELECT * FROM blog whre verify=1")
+    .then((result) => {
+      res.render("users/blogs", {
+        blogs: result[0],
+        categories: data.categories,
+        title: "Tüm Kurslar",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 router.use("/", function (req, res) {
-  res.render("users/index", data);
+  db.execute("SELECT * FROM blog where home=1 and verify=1")
+    .then((result) => {
+      db.execute("SELECT * FROM category")
+        .then((result2) => {
+          res.render("users/index", {
+            blogs: result[0],
+            categories: result2[0],
+            title: "Popüler Kurslar",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 module.exports = router;
