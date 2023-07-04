@@ -3,42 +3,53 @@ const router = express.Router();
 const path = require("path");
 const db = require("../data/db");
 
-router.use("/blogs/:blogid", function (req, res) {
-  res.render("users/blog-details");
+router.use("/blogs/:blogid", async function (req, res) {
+  const blogid = req.params.blogid;
+  try {
+    const [blog] = await db.execute("SELECT * FROM blog where blogid=?", [
+      blogid,
+    ]);
+
+    res.render("users/blog-details", {
+      blog: blog[0],
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
-router.use("/blogs", function (req, res) {
-  db.execute("SELECT * FROM blog whre verify=1")
-    .then((result) => {
-      res.render("users/blogs", {
-        blogs: result[0],
-        categories: data.categories,
-        title: "Tüm Kurslar",
-      });
-    })
-    .catch((err) => {
-      console.log(err);
+router.use("/blogs", async function (req, res) {
+  try {
+    const [blogs] = await db.execute("SELECT * FROM blog where verify=1");
+
+    const [categories] = await db.execute("SELECT * FROM category");
+
+    res.render("users/blogs", {
+      blogs: blogs,
+      categories: categories,
+      title: "Tüm Kurslar",
     });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
-router.use("/", function (req, res) {
-  db.execute("SELECT * FROM blog where home=1 and verify=1")
-    .then((result) => {
-      db.execute("SELECT * FROM category")
-        .then((result2) => {
-          res.render("users/index", {
-            blogs: result[0],
-            categories: result2[0],
-            title: "Popüler Kurslar",
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    })
-    .catch((err) => {
-      console.log(err);
+router.use("/", async function (req, res) {
+  try {
+    const [blogs] = await db.execute(
+      "SELECT * FROM blog where home=1 and verify=1"
+    );
+
+    const [categories] = await db.execute("SELECT * FROM category");
+
+    res.render("users/index", {
+      blogs: blogs,
+      categories: categories,
+      title: "Popüler Kurslar",
     });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = router;

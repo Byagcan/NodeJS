@@ -27,7 +27,10 @@
               </div>
               <div class="col-md-9">
                 <div class="card-body">
-                  <h5 class="card-title"><%= blog.title %></h5>
+                  <h5 class="card-title">
+                    <a style="text-decoration: none;" href="/blogs/<%= blog.blogid %>">
+                      <%= blog.title %>
+                    </a>
                   <p class="card-text"><%= blog.description %></p>
                 </div>
               </div>

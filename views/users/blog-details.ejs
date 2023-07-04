@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog Detail</title>
+    <%- include('../partials/header', headertitle="Blog Detail Page") %>
   </head>
   <body>
-    <h1>Blog Detail</h1>
+    <%- include('../partials/nav') %>
+    <div class="card mb-3">
+      <img
+        height="600px"
+        class="card-img-top"
+        src="<%= blog.image %>"
+        alt="Card image cap"
+      />
+      <div class="card-body">
+        <h5 class="card-title"><%= blog.title %></h5>
+        <p class="card-text"><%= blog.description %></p>
+        <p class="card-text">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </p>
+      </div>
+    </div>
   </body>
 </html>
